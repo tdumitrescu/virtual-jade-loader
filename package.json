@@ -21,5 +21,11 @@
   "bugs": {
     "url": "https://github.com/tdumitrescu/virtual-jade-loader/issues"
   },
-  "homepage": "https://github.com/tdumitrescu/virtual-jade-loader#readme"
+  "homepage": "https://github.com/tdumitrescu/virtual-jade-loader#readme",
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  },
+  "peerDependencies": {
+    "virtual-jade": "^0.1.0"
+  }
 }
