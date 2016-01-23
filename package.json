@@ -1,0 +1,25 @@
+{
+  "name": "virtual-jade-loader",
+  "version": "0.1.0",
+  "description": "webpack loader for jade -> virtual-dom",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tdumitrescu/virtual-jade-loader.git"
+  },
+  "keywords": [
+    "jade",
+    "virtual-dom",
+    "webpack",
+    "loader"
+  ],
+  "author": "Ted Dumitrescu <webdev@cmme.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdumitrescu/virtual-jade-loader/issues"
+  },
+  "homepage": "https://github.com/tdumitrescu/virtual-jade-loader#readme"
+}
