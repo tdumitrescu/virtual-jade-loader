@@ -1,7 +1,7 @@
 {
   "name": "virtual-jade-loader",
   "version": "0.1.0",
-  "description": "webpack loader for jade -> virtual-dom",
+  "description": "webpack loader for jade -> virtual-dom/hyperscript",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -13,6 +13,7 @@
   "keywords": [
     "jade",
     "virtual-dom",
+    "hyperscript",
     "webpack",
     "loader"
   ],
