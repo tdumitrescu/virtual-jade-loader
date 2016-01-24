@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "webpack loader for jade -> virtual-dom/hyperscript",
   "main": "index.js",
+  "engines": {
+    "node": ">=4.2"
+  },
   "scripts": {
     "test": "mocha"
   },
