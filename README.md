@@ -46,8 +46,7 @@ const vtree = render({foo: 'bar'});
 ## Limitations
 
 Like `virtual-jade`, this loader currently supports only basic Jade
-functionality. Features such as mixins and includes have not yet been
-implemented.
+functionality. Features such as includes have not yet been implemented.
 
 ## License
 
