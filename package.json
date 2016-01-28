@@ -1,6 +1,6 @@
 {
   "name": "virtual-jade-loader",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "webpack loader for jade -> virtual-dom/hyperscript",
   "main": "index.js",
   "engines": {
@@ -31,7 +31,6 @@
     "mocha": "^2.3.4"
   },
   "peerDependencies": {
-    "js-beautify": "^1.5.5",
-    "virtual-jade": "^0.1.0"
+    "virtual-jade": ">=0.2.1"
   }
 }
