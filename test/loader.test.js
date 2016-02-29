@@ -13,7 +13,7 @@ describe('loader', function() {
   });
 
   it('returns a virtual-dom node from the template function', function() {
-    expect(loaded).to.contain('h("div",{');
+    expect(loaded).to.contain('h("div", {');
   });
 
   it('passes static text content', function() {
