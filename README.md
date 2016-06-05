@@ -1,4 +1,5 @@
 # virtual-jade-loader
+[![Build Status](https://travis-ci.org/tdumitrescu/virtual-jade-loader.svg?branch=master)](https://travis-ci.org/tdumitrescu/virtual-jade-loader)
 
 A [Webpack](https://webpack.github.io/) loader which uses
 [virtual-jade](https://github.com/jonathanong/virtual-jade) in order to
