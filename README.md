@@ -26,9 +26,7 @@ var webpackConfig = {
     ],
   },
 
-  .
-  .
-  .
+  // ...
 
 };
 ```
@@ -40,8 +38,8 @@ access the compiled template function, which returns a virtual-dom `VNode`
 instead of HTML:
 
 ```javascript
-import render from './index.jade';
-const vtree = render({foo: 'bar'});
+import template from './index.jade';
+const vtree = template({foo: 'bar'});
 ```
 
 ## Limitations
