@@ -1,11 +1,11 @@
-// copied directly from @sokra's jade-loader tests:
+// copied from @sokra's jade-loader tests:
 // https://github.com/webpack/jade-loader/blob/afee6b0b/test/fakeModuleSystem.js
 
 var fs = require("fs");
 var path = require("path");
 
 module.exports = function runLoader(loader, directory, filename, arg, callback) {
-  var async = true;
+  var async = false; // don't default to true or sync loaders won't work
   var loaderContext = {
     async: function() {
       async = true;
