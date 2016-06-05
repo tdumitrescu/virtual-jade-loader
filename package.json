@@ -28,7 +28,9 @@
   "homepage": "https://github.com/tdumitrescu/virtual-jade-loader#readme",
   "devDependencies": {
     "expect.js": "^0.3.1",
-    "mocha": "^2.3.4"
+    "js-beautify": "^1.5.5",
+    "mocha": "^2.3.4",
+    "virtual-jade": ">=0.2.2"
   },
   "peerDependencies": {
     "js-beautify": "^1.5.5",
