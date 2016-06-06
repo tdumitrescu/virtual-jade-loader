@@ -10,16 +10,19 @@ var fixturesPath = path.join(__dirname, 'fixtures');
 function loadFixture(fixtureName, loadedCB) {
   var filename = path.join(fixturesPath, fixtureName);
   runLoader(
-    vjadeLoader, fixturesPath, filename, fs.readFileSync(filename, "utf-8"), loadedCB
+    vjadeLoader, fixturesPath, filename, fs.readFileSync(filename, "utf-8"),
+    function(err, loaded) {
+      if (err) {
+        throw err;
+      }
+      loadedCB(loaded);
+    }
   );
 }
 
 describe('virtual-jade loader', function() {
   it('compiles jade files', function(done) {
-    loadFixture('hello.jade', function(err, loaded) {
-      if (err) {
-        throw err;
-      }
+    loadFixture('hello.jade', function(loaded) {
       expect(loaded).to.be.a('string');
       expect(loaded).to.contain('h("div", {');
       expect(loaded).to.contain('hello');
@@ -29,17 +32,14 @@ describe('virtual-jade loader', function() {
   });
 
   it('exports a template function', function(done) {
-    loadFixture('hello.jade', function(err, loaded) {
+    loadFixture('hello.jade', function(loaded) {
       expect(loaded).to.contain('exports = _jade_template_fn');
       done();
     });
   });
 
   it('inserts included file content', function(done) {
-    loadFixture('include.jade', function(err, loaded) {
-      if (err) {
-        throw err;
-      }
+    loadFixture('include.jade', function(loaded) {
       expect(loaded).to.be.a('string');
       expect(loaded).to.contain('h("div", {');
       expect(loaded).to.contain('Hello');
