@@ -15,6 +15,7 @@ function loadFixture(fixtureName, loadedCB) {
       if (err) {
         throw err;
       }
+      expect(loaded).to.be.a('string');
       loadedCB(loaded);
     }
   );
@@ -23,7 +24,6 @@ function loadFixture(fixtureName, loadedCB) {
 describe('virtual-jade loader', function() {
   it('compiles jade files', function(done) {
     loadFixture('hello.jade', function(loaded) {
-      expect(loaded).to.be.a('string');
       expect(loaded).to.contain('h("div", {');
       expect(loaded).to.contain('hello');
       expect(loaded).to.contain('world!');
@@ -40,11 +40,20 @@ describe('virtual-jade loader', function() {
 
   it('inserts included file content', function(done) {
     loadFixture('include.jade', function(loaded) {
-      expect(loaded).to.be.a('string');
       expect(loaded).to.contain('h("div", {');
       expect(loaded).to.contain('Hello');
       expect(loaded).to.contain('llamas!!!');
       expect(loaded).to.contain('world');
+      done();
+    });
+  });
+
+  it('inserts extended file content', function(done) {
+    loadFixture('extends.jade', function(loaded) {
+      expect(loaded).to.contain('h("div", {');
+      expect(loaded).to.contain('capybara');
+      expect(loaded).not.to.contain('overridden animal');
+      expect(loaded).to.contain('default content');
       done();
     });
   });
