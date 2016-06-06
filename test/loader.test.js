@@ -44,5 +44,22 @@ describe('virtual-jade loader', function() {
         }
       );
     });
+
+    it('inserts included file content', function(done) {
+      var filename = path.join(fixturesPath, 'include.jade');
+      runLoader(vjadeLoader, fixturesPath, filename, fs.readFileSync(filename, "utf-8"),
+        function(err, loaded) {
+          if (err) {
+            throw err;
+          }
+          expect(loaded).to.be.a('string');
+          expect(loaded).to.contain('h("div", {');
+          expect(loaded).to.contain('Hello');
+          expect(loaded).to.contain('llamas!!!');
+          expect(loaded).to.contain('world');
+          done();
+        }
+      );
+    });
   });
 });
