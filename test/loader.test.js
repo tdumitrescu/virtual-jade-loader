@@ -7,59 +7,45 @@ var vjadeLoader = require('../');
 
 var fixturesPath = path.join(__dirname, 'fixtures');
 
+function loadFixture(fixtureName, loadedCB) {
+  var filename = path.join(fixturesPath, fixtureName);
+  runLoader(
+    vjadeLoader, fixturesPath, filename, fs.readFileSync(filename, "utf-8"), loadedCB
+  );
+}
+
 describe('virtual-jade loader', function() {
-  context('when run directly', function() {
-    var loaded = vjadeLoader('.bla Hello world');
-
-    it('creates a template function', function() {
-      expect(loaded).to.contain('function _jade_template_fn(');
-    });
-
-    it('exports a template function', function() {
-      expect(loaded).to.contain('exports = _jade_template_fn');
-    });
-
-    it('returns a virtual-dom node from the template function', function() {
+  it('compiles jade files', function(done) {
+    loadFixture('hello.jade', function(err, loaded) {
+      if (err) {
+        throw err;
+      }
+      expect(loaded).to.be.a('string');
       expect(loaded).to.contain('h("div", {');
-    });
-
-    it('passes static text content', function() {
-      expect(loaded).to.contain('Hello world');
+      expect(loaded).to.contain('hello');
+      expect(loaded).to.contain('world!');
+      done();
     });
   });
 
-  context('when run with webpack module loader', function() {
-    it('compiles jade files', function(done) {
-      var filename = path.join(fixturesPath, 'hello.jade');
-      runLoader(vjadeLoader, fixturesPath, filename, fs.readFileSync(filename, "utf-8"),
-        function(err, loaded) {
-          if (err) {
-            throw err;
-          }
-          expect(loaded).to.be.a('string');
-          expect(loaded).to.contain('h("div", {');
-          expect(loaded).to.contain('hello');
-          expect(loaded).to.contain('world!');
-          done();
-        }
-      );
+  it('exports a template function', function(done) {
+    loadFixture('hello.jade', function(err, loaded) {
+      expect(loaded).to.contain('exports = _jade_template_fn');
+      done();
     });
+  });
 
-    it('inserts included file content', function(done) {
-      var filename = path.join(fixturesPath, 'include.jade');
-      runLoader(vjadeLoader, fixturesPath, filename, fs.readFileSync(filename, "utf-8"),
-        function(err, loaded) {
-          if (err) {
-            throw err;
-          }
-          expect(loaded).to.be.a('string');
-          expect(loaded).to.contain('h("div", {');
-          expect(loaded).to.contain('Hello');
-          expect(loaded).to.contain('llamas!!!');
-          expect(loaded).to.contain('world');
-          done();
-        }
-      );
+  it('inserts included file content', function(done) {
+    loadFixture('include.jade', function(err, loaded) {
+      if (err) {
+        throw err;
+      }
+      expect(loaded).to.be.a('string');
+      expect(loaded).to.contain('h("div", {');
+      expect(loaded).to.contain('Hello');
+      expect(loaded).to.contain('llamas!!!');
+      expect(loaded).to.contain('world');
+      done();
     });
   });
 });
