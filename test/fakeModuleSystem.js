@@ -1,4 +1,4 @@
-// copied from @sokra's jade-loader tests:
+// based onm @sokra's jade-loader tests:
 // https://github.com/webpack/jade-loader/blob/afee6b0b/test/fakeModuleSystem.js
 
 var fs = require("fs");
