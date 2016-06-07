@@ -7,9 +7,16 @@ var path = require("path");
 module.exports = function runLoader(loader, directory, filename, arg, callback) {
   var async = false; // don't default to true or sync loaders won't work
   var loaderContext = {
+    _deps: [],
+    addDependency: function(path) {
+      this._deps.push(path)
+    },
     async: function() {
       async = true;
       return callback;
+    },
+    dependency: function(path) {
+      return this.addDependency(path);
     },
     loaders: ["itself"],
     loaderIndex: 0,
@@ -32,5 +39,5 @@ module.exports = function runLoader(loader, directory, filename, arg, callback) 
     }
   };
   var res = loader.call(loaderContext, arg);
-  if(!async) callback(null, res);
+  if(!async) callback.call(loaderContext, null, res);
 }

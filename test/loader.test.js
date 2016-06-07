@@ -16,14 +16,14 @@ function loadFixture(fixtureName, loadedCB) {
         throw err;
       }
       expect(loaded).to.be.a('string');
-      loadedCB(loaded);
+      loadedCB(this, loaded);
     }
   );
 }
 
 describe('virtual-jade loader', function() {
   it('compiles jade files', function(done) {
-    loadFixture('hello.jade', function(loaded) {
+    loadFixture('hello.jade', function(loaderContext, loaded) {
       expect(loaded).to.contain('h("div", {');
       expect(loaded).to.contain('hello');
       expect(loaded).to.contain('world!');
@@ -32,28 +32,30 @@ describe('virtual-jade loader', function() {
   });
 
   it('exports a template function', function(done) {
-    loadFixture('hello.jade', function(loaded) {
+    loadFixture('hello.jade', function(loaderContext, loaded) {
       expect(loaded).to.contain('exports = _jade_template_fn');
       done();
     });
   });
 
   it('inserts included file content', function(done) {
-    loadFixture('include.jade', function(loaded) {
+    loadFixture('include.jade', function(loaderContext, loaded) {
       expect(loaded).to.contain('h("div", {');
       expect(loaded).to.contain('Hello');
       expect(loaded).to.contain('llamas!!!');
       expect(loaded).to.contain('world');
+      expect(loaderContext._deps[0].endsWith(__dirname + '/fixtures/included-file.jade')).to.equal(true)
       done();
     });
   });
 
   it('inserts extended file content', function(done) {
-    loadFixture('extends.jade', function(loaded) {
+    loadFixture('extends.jade', function(loaderContext, loaded) {
       expect(loaded).to.contain('h("div", {');
       expect(loaded).to.contain('capybara');
       expect(loaded).not.to.contain('overridden animal');
       expect(loaded).to.contain('default content');
+      expect(loaderContext._deps[0].endsWith(__dirname + '/fixtures/extended-layout.jade')).to.equal(true)
       done();
     });
   });
