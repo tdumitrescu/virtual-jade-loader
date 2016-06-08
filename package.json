@@ -2,7 +2,7 @@
   "name": "virtual-jade-loader",
   "version": "0.3.0",
   "description": "webpack loader for jade -> virtual-dom/hyperscript",
-  "main": "lib/index.js",
+  "main": "lib",
   "engines": {
     "node": ">=4.2"
   },
@@ -32,11 +32,11 @@
     "expect.js": "^0.3.1",
     "js-beautify": "^1.5.5",
     "mocha": "^2.3.4",
-    "virtual-jade": "^0.3.1"
+    "virtual-jade": "^0.3.2"
   },
   "peerDependencies": {
     "js-beautify": "^1.5.5",
-    "virtual-jade": "^0.3.1"
+    "virtual-jade": "^0.3.2"
   },
   "dependencies": {
     "jade": "^1.11.0",
