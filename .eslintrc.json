@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "comma-dangle":
+      [2, "always-multiline"],
+    "indent":
+      [2, 2, {"SwitchCase": 1}],
+    "linebreak-style":
+      [2, "unix"],
+    "no-console":
+      0,
+    "quotes":
+      [2, "single"],
+    "semi":
+      [2, "always"]
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  }
+}

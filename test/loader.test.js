@@ -1,22 +1,62 @@
 var expect = require('expect.js');
-var loader = require('../');
+var fs = require('fs');
+var path = require('path');
 
-describe('loader', function() {
-  var loaded = loader('.bla Hello world');
+var runLoader = require("./fakeModuleSystem");
+var vjadeLoader = require('../');
 
-  it('creates a template function', function() {
-    expect(loaded).to.contain('function _jade_template_fn(');
+var fixturesPath = path.join(__dirname, 'fixtures');
+
+function loadFixture(fixtureName, loadedCB) {
+  var filename = path.join(fixturesPath, fixtureName);
+  runLoader(
+    vjadeLoader, fixturesPath, filename, fs.readFileSync(filename, "utf-8"),
+    function(err, loaded) {
+      if (err) {
+        throw err;
+      }
+      expect(loaded).to.be.a('string');
+      loadedCB(this, loaded);
+    }
+  );
+}
+
+describe('virtual-jade loader', function() {
+  it('compiles jade files', function(done) {
+    loadFixture('hello.jade', function(loaderContext, loaded) {
+      expect(loaded).to.contain('h("div", {');
+      expect(loaded).to.contain('hello');
+      expect(loaded).to.contain('world!');
+      done();
+    });
   });
 
-  it('exports a template function', function() {
-    expect(loaded).to.contain('exports = _jade_template_fn');
+  it('exports a template function', function(done) {
+    loadFixture('hello.jade', function(loaderContext, loaded) {
+      expect(loaded).to.contain('exports = _jade_template_fn');
+      done();
+    });
   });
 
-  it('returns a virtual-dom node from the template function', function() {
-    expect(loaded).to.contain('h("div", {');
+  it('inserts included file content', function(done) {
+    loadFixture('include.jade', function(loaderContext, loaded) {
+      expect(loaded).to.contain('h("div", {');
+      expect(loaded).to.contain('Hello');
+      expect(loaded).to.contain('llamas!!!');
+      expect(loaded).to.contain('world');
+      expect(loaderContext._deps[0].endsWith(__dirname + '/fixtures/included-file.jade')).to.equal(true)
+      done();
+    });
   });
 
-  it('passes static text content', function() {
-    expect(loaded).to.contain('Hello world');
+  it('inserts extended file content', function(done) {
+    loadFixture('extends.jade', function(loaderContext, loaded) {
+      expect(loaded).to.contain('h("div", {');
+      expect(loaded).to.contain('capybara');
+      expect(loaded).not.to.contain('overridden animal');
+      expect(loaded).to.contain('default content');
+      expect(loaderContext._deps[0].endsWith(__dirname + '/fixtures/extended-layout.jade')).to.equal(true)
+      done();
+    });
   });
 });
