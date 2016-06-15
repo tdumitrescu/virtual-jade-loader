@@ -42,11 +42,6 @@ import template from './index.jade';
 const vtree = template({foo: 'bar'});
 ```
 
-## Limitations
-
-Like `virtual-jade`, this loader currently supports only basic Jade
-functionality. Features such as includes have not yet been implemented.
-
 ## License
 
 MIT
