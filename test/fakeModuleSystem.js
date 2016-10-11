@@ -20,6 +20,7 @@ module.exports = function runLoader(loader, directory, filename, arg, callback) 
     },
     loaders: ["itself"],
     loaderIndex: 0,
+    options: {},
     query: "",
     resource: filename,
     callback: function() {
