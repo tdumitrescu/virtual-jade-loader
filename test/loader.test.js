@@ -7,10 +7,15 @@ var vjadeLoader = require('../');
 
 var fixturesPath = path.join(__dirname, 'fixtures');
 
-function loadFixture(fixtureName, loadedCB) {
+function loadFixture(fixtureName, options, loadedCB) {
+  if (arguments.length < 3) {
+    loadedCB = options;
+  }
+  options = options || {};
+
   var filename = path.join(fixturesPath, fixtureName);
   runLoader(
-    vjadeLoader, fixturesPath, filename, fs.readFileSync(filename, "utf-8"),
+    vjadeLoader, fixturesPath, filename, fs.readFileSync(filename, "utf-8"), options,
     function(err, loaded) {
       if (err) {
         throw err;
@@ -57,6 +62,16 @@ describe('virtual-jade loader', function() {
       expect(loaded).to.contain('default content');
       expect(loaderContext._deps[0].endsWith(__dirname + '/fixtures/extended-layout.jade')).to.equal(true)
       done();
+    });
+  });
+
+  context('passing user options', function() {
+    it('passes "pretty" from query string', function(done) {
+      loadFixture('hello.jade', {query: '?pretty=false'}, function(loaderContext, loaded) {
+        expect(loaded).not.to.contain('h("div", {');
+        expect(loaded).to.contain('h("div",{');
+        done();
+      });
     });
   });
 });

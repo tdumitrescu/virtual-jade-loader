@@ -4,7 +4,7 @@
 var fs = require("fs");
 var path = require("path");
 
-module.exports = function runLoader(loader, directory, filename, arg, callback) {
+module.exports = function runLoader(loader, directory, filename, arg, options, callback) {
   var async = false; // don't default to true or sync loaders won't work
   var loaderContext = {
     _deps: [],
@@ -21,7 +21,7 @@ module.exports = function runLoader(loader, directory, filename, arg, callback) 
     loaders: ["itself"],
     loaderIndex: 0,
     options: {},
-    query: "",
+    query: options.query || "",
     resource: filename,
     callback: function() {
       async = true;
