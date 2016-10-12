@@ -73,5 +73,14 @@ describe('virtual-jade loader', function() {
         done();
       });
     });
+
+    // TODO update to virtual-jade version that supports vdom option
+    it.skip('passes "vdom" from query string', function(done) {
+      loadFixture('hello.jade', {query: '?vdom=snabbdom'}, function(loaderContext, loaded) {
+        expect(loaded).not.to.contain('virtual-dom');
+        expect(loaded).to.contain('snabbdom');
+        done();
+      });
+    });
   });
 });
