@@ -74,6 +74,14 @@ describe('virtual-jade loader', function() {
       });
     });
 
+    it('passes "runtime" from query string', function(done) {
+      loadFixture('hello.jade', {query: '?runtime=importMyThing();'}, function(loaderContext, loaded) {
+        expect(loaded).not.to.contain('virtual-dom');
+        expect(loaded).to.contain('importMyThing();');
+        done();
+      });
+    });
+
     it('passes "vdom" from query string', function(done) {
       loadFixture('hello.jade', {query: '?vdom=snabbdom'}, function(loaderContext, loaded) {
         expect(loaded).not.to.contain('virtual-dom');
