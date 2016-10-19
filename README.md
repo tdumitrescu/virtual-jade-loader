@@ -31,6 +31,33 @@ var webpackConfig = {
 };
 ```
 
+## Configuration
+
+The recommended way to configure options for `virtual-jade` is with a top-level `virtualJadeLoader` object, e.g.:
+```javascript
+var webpackConfig = {
+  module: {
+    // ...
+  },
+
+  virtualJadeLoader: {
+    runtime: 'var h = require("my-special-lib/h");',
+  },
+
+  // ...
+};
+```
+
+The available options are:
+- `marshalDataset`
+- `pretty`
+- `propsWrapper`
+- `runtime`
+- `vdom`
+
+See the [virtual-jade documentation](https://github.com/tdumitrescu/virtual-jade#api) for an explanation of the options.
+
+
 ## Usage
 
 With Webpack configured as above, simply import/require a Jade file to
