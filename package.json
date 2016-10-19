@@ -32,11 +32,11 @@
     "expect.js": "^0.3.1",
     "js-beautify": "^1.5.5",
     "mocha": "^2.3.4",
-    "virtual-jade": "^0.4.0"
+    "virtual-jade": "^0.5.0"
   },
   "peerDependencies": {
     "js-beautify": "^1.5.5",
-    "virtual-jade": ">=0.3.2"
+    "virtual-jade": ">=0.5.0"
   },
   "dependencies": {
     "jade": "^1.11.0",
