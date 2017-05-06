@@ -2,10 +2,11 @@
 [![Build Status](https://travis-ci.org/tdumitrescu/virtual-jade-loader.svg?branch=master)](https://travis-ci.org/tdumitrescu/virtual-jade-loader)
 
 A [Webpack](https://webpack.github.io/) loader which uses
-[virtual-jade](https://github.com/jonathanong/virtual-jade) in order to
-translate [Jade](http://jade-lang.com/) templates into Hyperscript for
-[virtual-dom](https://github.com/Matt-Esch/virtual-dom) diffing/rendering
-flows.
+[virtual-jade](https://github.com/tdumitrescu/virtual-jade) to
+translate [Jade/Pug](https://pugjs.org) templates into Hyperscript for
+Virtual DOM diffing/rendering flows. Works with libraries such as 
+[virtual-dom](https://github.com/Matt-Esch/virtual-dom) and 
+[snabbdom](https://github.com/snabbdom/snabbdom).
 
 ## Installation
 
