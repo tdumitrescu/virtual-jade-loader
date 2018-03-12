@@ -4,8 +4,8 @@
 A [Webpack](https://webpack.github.io/) loader which uses
 [virtual-jade](https://github.com/tdumitrescu/virtual-jade) to
 translate [Jade/Pug](https://pugjs.org) templates into Hyperscript for
-Virtual DOM diffing/rendering flows. Works with libraries such as 
-[virtual-dom](https://github.com/Matt-Esch/virtual-dom) and 
+Virtual DOM diffing/rendering flows. Works with libraries such as
+[virtual-dom](https://github.com/Matt-Esch/virtual-dom) and
 [snabbdom](https://github.com/snabbdom/snabbdom).
 
 ## Installation
@@ -34,7 +34,34 @@ var webpackConfig = {
 
 ## Configuration
 
-The recommended way to configure options for `virtual-jade` is with a top-level `virtualJadeLoader` object, e.g.:
+### Webpack >=4.0
+The recommended way to configure options for `virtual-jade` is with a loader `options` object:
+```javascript
+var webpackConfig = {
+  module: {
+    rules: [
+      {
+        test: /\.jade$/,
+        use: [
+          {
+            loader: `virtual-jade-loader`,
+            options: {
+              runtime: `var h = require("my-special-lib/h");`,
+            }
+          },
+        ],
+      },
+
+      // ...
+
+    ],
+  },
+};
+```
+(see below for available options)
+
+### Webpack <4.0:
+For older versions of Webpack, the recommended way to configure options for `virtual-jade` is with a top-level `virtualJadeLoader` object, e.g.:
 ```javascript
 var webpackConfig = {
   module: {
