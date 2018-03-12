@@ -66,24 +66,24 @@ describe('virtual-jade loader', function() {
   });
 
   context('passing user options', function() {
-    it('passes "pretty" from query string', function(done) {
-      loadFixture('hello.jade', {query: '?pretty=false'}, function(loaderContext, loaded) {
+    it('passes "pretty" from options config', function(done) {
+      loadFixture('hello.jade', {query: {pretty: false}}, function(loaderContext, loaded) {
         expect(loaded).not.to.contain('h("div", {');
         expect(loaded).to.contain('h("div",{');
         done();
       });
     });
 
-    it('passes "runtime" from query string', function(done) {
-      loadFixture('hello.jade', {query: '?runtime=importMyThing();'}, function(loaderContext, loaded) {
+    it('passes "runtime" from options config', function(done) {
+      loadFixture('hello.jade', {query: {runtime: 'importMyThing();'}}, function(loaderContext, loaded) {
         expect(loaded).not.to.contain('virtual-dom');
         expect(loaded).to.contain('importMyThing();');
         done();
       });
     });
 
-    it('passes "vdom" from query string', function(done) {
-      loadFixture('hello.jade', {query: '?vdom=snabbdom'}, function(loaderContext, loaded) {
+    it('passes "vdom" from options config', function(done) {
+      loadFixture('hello.jade', {query: {vdom: 'snabbdom'}}, function(loaderContext, loaded) {
         expect(loaded).not.to.contain('virtual-dom');
         expect(loaded).to.contain('snabbdom');
         done();
