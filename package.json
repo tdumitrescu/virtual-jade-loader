@@ -4,7 +4,7 @@
   "description": "webpack loader for jade -> virtual-dom/hyperscript",
   "main": "lib",
   "engines": {
-    "node": ">=4.2"
+    "node": ">=6.0"
   },
   "scripts": {
     "lint": "eslint lib",
@@ -32,11 +32,11 @@
     "expect.js": "^0.3.1",
     "js-beautify": "^1.5.5",
     "mocha": "^2.3.4",
-    "virtual-jade": "^0.5.0"
+    "virtual-jade": "^0.9.1"
   },
   "peerDependencies": {
     "js-beautify": "^1.5.5",
-    "virtual-jade": ">=0.5.0"
+    "virtual-jade": ">=0.9.0"
   },
   "dependencies": {
     "jade": "1.11.0",
